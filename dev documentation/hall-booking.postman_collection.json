@@ -1,0 +1,166 @@
+{
+	"info": {
+		"_postman_id": "bffac092-c051-4ef2-adda-ca729151a98b",
+		"name": "hall-booking",
+		"description": "Fetch Rooms: GET\n{BaseUrl}/get\nRequest: \n{}\n\nResponse:\n[\n    {\n        \"_id\": \"62714c9cd597b50bfa4878be\",\n        \"room_id\": 1,\n        \"room_name\": \"Suite Room - A\",\n        \"seats\": 4,\n        \"amenities\": [\n            {\n                \"item1\": \"Luxury Bed\",\n                \"item2\": \"TV\",\n                \"item3\": \"AC\"\n            }\n        ],\n        \"priceperhour\": 500\n    }\n]\n\nCreate Rooms: POST\nhttp://{BaseUrl}/set\n\nRequest:\n{       \n        \"room_id\": 2,\n        \"room_name\": \"VIP Room - A\",\n        \"seats\": 5,\n        \"amenities\": [\n            {\n                \"item1\": \"Luxury Bed and Bath\",\n                \"item2\": \"SONY TV\",\n                \"item3\": \"AC BAR\"\n            }\n        ],\n        \"priceperhour\": 5000\n    }\n\nResponse:\n{\n    \"acknowledged\": true,\n    \"insertedId\": \"627157a9e6a28a61d96c264b\"\n}    \n\n\nBooking Room: GET\n{BaseUrl}/bookings/get\n\nRequest: \n{}\n\nResponse:\n[\n    {\n        \"_id\": \"62715ff2d597b50bfa4878bf\",\n        \"customer_name\": \"John\",\n        \"date\": \"3/5/2022\",\n        \"start_time\": \"22:31:38 GMT+0530 (India Standard Time)\",\n        \"end_time\": \"22:31:38 GMT+0530 (India Standard Time)\",\n        \"room_id\": 1\n    },\n    {\n        \"_id\": \"62716181233f2b0142718242\",\n        \"customer_name\": \"Peter\",\n        \"date\": \"4/5/2022\",\n        \"start_time\": \"23:31:38 GMT+0530 (India Standard Time)\",\n        \"end_time\": \"24:31:38 GMT+0530 (India Standard Time)\",\n        \"room_id\": 1\n    }\n]\n\nCreate Bookings: POST\n{BaseUrl}/bookings/set\n\nRequest:\n{   \n    \"customer_name\": \"Peter\",\n    \"date\": \"4/5/2022\",\n    \"start_time\": \"23:31:38 GMT+0530 (India Standard Time)\",\n    \"end_time\": \"24:31:38 GMT+0530 (India Standard Time)\",\n    \"room_id\": 1,\n    \"status\": \"CHECKIN\" // \"CHECKOUT\",\"PENDING\"\n  }\n\n Response:\n {\n    \"acknowledged\": true,\n    \"insertedId\": \"62716181233f2b0142718242\"\n} \n\nList the booked rooms: GET\n{BaseUrl}/bookings/getbookedrooms\n\nRequest:\n{}\n\nResponse:\n[\n  {\n    \"_id\": \"62715ff2d597b50bfa4878bf\",\n    \"customer_name\": \"John\",\n    \"date\": \"3/5/2022\",\n    \"start_time\": \"22:31:38 GMT+0530 (India Standard Time)\",\n    \"end_time\": \"22:31:38 GMT+0530 (India Standard Time)\",\n    \"room_id\": 1,\n    \"status\": \"CHECKIN\",\n    \"room_booked_data\": [\n      {\n        \"room_name\": \"Suite Room - A\",\n        \"amenities\": [\n          {\n            \"item1\": \"Luxury Bed\",\n            \"item2\": \"TV\",\n            \"item3\": \"AC\"\n          }\n        ]\n      }\n    ]\n  },\n  {\n    \"_id\": \"62716181233f2b0142718242\",\n    \"customer_name\": \"Peter\",\n    \"date\": \"4/5/2022\",\n    \"start_time\": \"23:31:38 GMT+0530 (India Standard Time)\",\n    \"end_time\": \"24:31:38 GMT+0530 (India Standard Time)\",\n    \"room_id\": 1,\n    \"status\": \"CHECKIN\",\n    \"room_booked_data\": [\n      {\n        \"room_name\": \"Suite Room - A\",\n        \"amenities\": [\n          {\n            \"item1\": \"Luxury Bed\",\n            \"item2\": \"TV\",\n            \"item3\": \"AC\"\n          }\n        ]\n      }\n    ]\n  }\n]\n\nList all customers with booked data: GET\n{BaseUrl}/bookings/getbookedroomswithcustomers\n\nRequest:\n{}\n\nResponse:\n[\n  {\n    \"customer_name\": \"John\",\n    \"date\": \"3/5/2022\",\n    \"start_time\": \"22:31:38 GMT+0530 (India Standard Time)\",\n    \"end_time\": \"22:31:38 GMT+0530 (India Standard Time)\",\n    \"room_booked_data\": [\n      {\n        \"room_name\": \"Suite Room - A\"\n      }\n    ]\n  },\n  {\n    \"customer_name\": \"Peter\",\n    \"date\": \"4/5/2022\",\n    \"start_time\": \"23:31:38 GMT+0530 (India Standard Time)\",\n    \"end_time\": \"24:31:38 GMT+0530 (India Standard Time)\",\n    \"room_booked_data\": [\n      {\n        \"room_name\": \"Suite Room - A\"\n      }\n    ]\n  },\n  {\n    \"customer_name\": \"Victor\",\n    \"date\": \"5/5/2022\",\n    \"start_time\": \"23:06:07 GMT+0530 (India Standard Time)\",\n    \"end_time\": \"23:06:07 GMT+0530 (India Standard Time)\",\n    \"status\": \"CHECKOUT\",\n    \"room_booked_data\": [\n      \n    ]\n  }\n]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "rooms-list",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3003/rooms/get",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3003",
+					"path": [
+						"rooms",
+						"get"
+					]
+				},
+				"description": "Fetch Rooms: GET\nhttp://localhost:3005/get\nRequest: \n{}\n\nResponse:\n[\n    {\n        \"_id\": \"62714c9cd597b50bfa4878be\",\n        \"room_id\": 1,\n        \"room_name\": \"Suite Room - A\",\n        \"seats\": 4,\n        \"amenities\": [\n            {\n                \"item1\": \"Luxury Bed\",\n                \"item2\": \"TV\",\n                \"item3\": \"AC\"\n            }\n        ],\n        \"priceperhour\": 500\n    }\n]"
+			},
+			"response": []
+		},
+		{
+			"name": "create-room",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{       \r\n        \"room_id\": 60,\r\n        \"room_name\": \"Double Room - A\",\r\n        \"seats\": 2,\r\n        \"amenities\": [\r\n            {                \r\n                \"item1\": \"SONY TV\",\r\n                \"item2\": \"AC BAR\"\r\n            }\r\n        ],\r\n        \"priceperhour\": 12000\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3003/rooms/set",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3003",
+					"path": [
+						"rooms",
+						"set"
+					]
+				},
+				"description": "Create Rooms: POST\n{BaseUrl}/rooms/set\nRequest:\n{       \n        \"room_id\": 60,\n        \"room_name\": \"Double Room - A\",\n        \"seats\": 2,\n        \"amenities\": [\n            {                \n                \"item1\": \"SONY TV\",\n                \"item2\": \"AC BAR\"\n            }\n        ],\n        \"priceperhour\": 12000\n}\n\nResponse:\n{\n    \"acknowledged\": true,\n    \"insertedId\": \"627614f4d157287b3f8e8bfb\"\n}"
+			},
+			"response": []
+		},
+		{
+			"name": "booking-list",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3003/bookings/get",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3003",
+					"path": [
+						"bookings",
+						"get"
+					]
+				},
+				"description": "Booking Room: GET\n{BaseUrl}/bookings/get\n\nRequest: \n{}\n\nResponse:\n[\n    {\n        \"_id\": \"62715ff2d597b50bfa4878bf\",\n        \"customer_name\": \"John\",\n        \"date\": \"3/5/2022\",\n        \"start_time\": \"22:31:38 GMT+0530 (India Standard Time)\",\n        \"end_time\": \"22:31:38 GMT+0530 (India Standard Time)\",\n        \"room_id\": 1\n    },\n    {\n        \"_id\": \"62716181233f2b0142718242\",\n        \"customer_name\": \"Peter\",\n        \"date\": \"4/5/2022\",\n        \"start_time\": \"23:31:38 GMT+0530 (India Standard Time)\",\n        \"end_time\": \"24:31:38 GMT+0530 (India Standard Time)\",\n        \"room_id\": 1\n    },\n    {\n        \"_id\": \"62740b0730920db18c653dd9\",\n        \"customer_name\": \"Victor\",\n        \"date\": \"5/5/2022\",\n        \"start_time\": \"23:06:07 GMT+0530 (India Standard Time)\",\n        \"end_time\": \"23:06:07 GMT+0530 (India Standard Time)\",\n        \"room_id\": 0,\n        \"status\": \"CHECKOUT\"\n    }\n]"
+			},
+			"response": []
+		},
+		{
+			"name": "create-booking",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{   \r\n    \"customer_name\": \"vetri\",\r\n    \"date\": \"4/5/2022\",\r\n    \"start_time\": \"23:31:38 GMT+0530 (India Standard Time)\",\r\n    \"end_time\": \"24:31:38 GMT+0530 (India Standard Time)\",\r\n    \"room_id\": 6,\r\n    \"status\": \"CHECKIN\"\r\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3003/bookings/set",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3003",
+					"path": [
+						"bookings",
+						"set"
+					]
+				},
+				"description": "Create Bookings: POST\nhttp://localhost:3003/bookings/set\n\nRequest:\n{   \n    \"customer_name\": \"Peter\",\n    \"date\": \"4/5/2022\",\n    \"start_time\": \"23:31:38 GMT+0530 (India Standard Time)\",\n    \"end_time\": \"24:31:38 GMT+0530 (India Standard Time)\",\n    \"room_id\": 1,\n    \"status\": \"CHECKIN\" // \"CHECKOUT\",\"PENDING\"\n  }\n\n\nResponse:\n{\n    \"acknowledged\": true,\n    \"insertedId\": \"627616fcd157287b3f8e8bfc\"\n}"
+			},
+			"response": []
+		},
+		{
+			"name": "getbookedrooms",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3003/bookings/getbookedrooms",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3003",
+					"path": [
+						"bookings",
+						"getbookedrooms"
+					]
+				},
+				"description": "List the booked rooms: GET\nhttp://localhost:3003/bookings/getbookedrooms\n\nRequest:\n{}\n\nResponse:\n[\n    {\n        \"_id\": \"62715ff2d597b50bfa4878bf\",\n        \"customer_name\": \"John\",\n        \"date\": \"3/5/2022\",\n        \"start_time\": \"22:31:38 GMT+0530 (India Standard Time)\",\n        \"end_time\": \"22:31:38 GMT+0530 (India Standard Time)\",\n        \"room_id\": 1,\n        \"room_booked_data\": [\n            {\n                \"room_name\": \"Suite Room - A\",\n                \"amenities\": [\n                    {\n                        \"item1\": \"Luxury Bed\",\n                        \"item2\": \"TV\",\n                        \"item3\": \"AC\"\n                    }\n                ]\n            }\n        ]\n    },\n    {\n        \"_id\": \"62716181233f2b0142718242\",\n        \"customer_name\": \"Peter\",\n        \"date\": \"4/5/2022\",\n        \"start_time\": \"23:31:38 GMT+0530 (India Standard Time)\",\n        \"end_time\": \"24:31:38 GMT+0530 (India Standard Time)\",\n        \"room_id\": 1,\n        \"room_booked_data\": [\n            {\n                \"room_name\": \"Suite Room - A\",\n                \"amenities\": [\n                    {\n                        \"item1\": \"Luxury Bed\",\n                        \"item2\": \"TV\",\n                        \"item3\": \"AC\"\n                    }\n                ]\n            }\n        ]\n    },\n    {\n        \"_id\": \"62740b0730920db18c653dd9\",\n        \"customer_name\": \"Victor\",\n        \"date\": \"5/5/2022\",\n        \"start_time\": \"23:06:07 GMT+0530 (India Standard Time)\",\n        \"end_time\": \"23:06:07 GMT+0530 (India Standard Time)\",\n        \"room_id\": 0,\n        \"status\": \"CHECKOUT\",\n        \"room_booked_data\": []\n    },\n    {\n        \"_id\": \"627616fcd157287b3f8e8bfc\",\n        \"customer_name\": \"vetri\",\n        \"date\": \"4/5/2022\",\n        \"start_time\": \"23:31:38 GMT+0530 (India Standard Time)\",\n        \"end_time\": \"24:31:38 GMT+0530 (India Standard Time)\",\n        \"room_id\": 6,\n        \"status\": \"CHECKIN\",\n        \"room_booked_data\": [\n            {\n                \"room_name\": \"Single Room - A\",\n                \"amenities\": [\n                    {\n                        \"item1\": \"SONY TV\",\n                        \"item2\": \"AC BAR\"\n                    }\n                ]\n            }\n        ]\n    }\n]"
+			},
+			"response": []
+		},
+		{
+			"name": "getbookedroomswithcustomers",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3003/bookings/getbookedroomswithcustomers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3003",
+					"path": [
+						"bookings",
+						"getbookedroomswithcustomers"
+					]
+				},
+				"description": "List all customers with booked data: GET\nhttp://localhost:3003/bookings/getbookedroomswithcustomers\n\nRequest:\n{}\n\nResponse:\n[\n  {\n    \"customer_name\": \"John\",\n    \"date\": \"3/5/2022\",\n    \"start_time\": \"22:31:38 GMT+0530 (India Standard Time)\",\n    \"end_time\": \"22:31:38 GMT+0530 (India Standard Time)\",\n    \"room_booked_data\": [\n      {\n        \"room_name\": \"Suite Room - A\"\n      }\n    ]\n  },\n  {\n    \"customer_name\": \"Peter\",\n    \"date\": \"4/5/2022\",\n    \"start_time\": \"23:31:38 GMT+0530 (India Standard Time)\",\n    \"end_time\": \"24:31:38 GMT+0530 (India Standard Time)\",\n    \"room_booked_data\": [\n      {\n        \"room_name\": \"Suite Room - A\"\n      }\n    ]\n  },\n  {\n    \"customer_name\": \"Victor\",\n    \"date\": \"5/5/2022\",\n    \"start_time\": \"23:06:07 GMT+0530 (India Standard Time)\",\n    \"end_time\": \"23:06:07 GMT+0530 (India Standard Time)\",\n    \"status\": \"CHECKOUT\",\n    \"room_booked_data\": [\n      \n    ]\n  }\n]"
+			},
+			"response": []
+		}
+	]
+}

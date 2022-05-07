@@ -1,0 +1,186 @@
+Fetch Rooms: GET
+http://localhost:3005/get
+Request: 
+{}
+
+Response:
+[
+    {
+        "_id": "62714c9cd597b50bfa4878be",
+        "room_id": 1,
+        "room_name": "Suite Room - A",
+        "seats": 4,
+        "amenities": [
+            {
+                "item1": "Luxury Bed",
+                "item2": "TV",
+                "item3": "AC"
+            }
+        ],
+        "priceperhour": 500
+    }
+]
+
+Create Rooms: POST
+http://localhost:3005/set
+
+Request:
+{       
+        "room_id": 2,
+        "room_name": "VIP Room - A",
+        "seats": 5,
+        "amenities": [
+            {
+                "item1": "Luxury Bed and Bath",
+                "item2": "SONY TV",
+                "item3": "AC BAR"
+            }
+        ],
+        "priceperhour": 5000
+    }
+
+Response:
+{
+    "acknowledged": true,
+    "insertedId": "627157a9e6a28a61d96c264b"
+}    
+
+
+Booking Room: GET
+http://localhost:3005/bookings/get
+
+Request: 
+{}
+
+Response:
+[
+    {
+        "_id": "62715ff2d597b50bfa4878bf",
+        "customer_name": "John",
+        "date": "3/5/2022",
+        "start_time": "22:31:38 GMT+0530 (India Standard Time)",
+        "end_time": "22:31:38 GMT+0530 (India Standard Time)",
+        "room_id": 1
+    },
+    {
+        "_id": "62716181233f2b0142718242",
+        "customer_name": "Peter",
+        "date": "4/5/2022",
+        "start_time": "23:31:38 GMT+0530 (India Standard Time)",
+        "end_time": "24:31:38 GMT+0530 (India Standard Time)",
+        "room_id": 1
+    }
+]
+
+Create Bookings: POST
+http://localhost:3005/bookings/set
+
+Request:
+{   
+    "customer_name": "Peter",
+    "date": "4/5/2022",
+    "start_time": "23:31:38 GMT+0530 (India Standard Time)",
+    "end_time": "24:31:38 GMT+0530 (India Standard Time)",
+    "room_id": 1,
+    "status": "CHECKIN" // "CHECKOUT","PENDING"
+  }
+
+ Response:
+ {
+    "acknowledged": true,
+    "insertedId": "62716181233f2b0142718242"
+} 
+
+List the booked rooms: GET
+http://localhost:3003/bookings/getbookedrooms
+
+Request:
+{}
+
+Response:
+[
+  {
+    "_id": "62715ff2d597b50bfa4878bf",
+    "customer_name": "John",
+    "date": "3/5/2022",
+    "start_time": "22:31:38 GMT+0530 (India Standard Time)",
+    "end_time": "22:31:38 GMT+0530 (India Standard Time)",
+    "room_id": 1,
+    "status": "CHECKIN",
+    "room_booked_data": [
+      {
+        "room_name": "Suite Room - A",
+        "amenities": [
+          {
+            "item1": "Luxury Bed",
+            "item2": "TV",
+            "item3": "AC"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "_id": "62716181233f2b0142718242",
+    "customer_name": "Peter",
+    "date": "4/5/2022",
+    "start_time": "23:31:38 GMT+0530 (India Standard Time)",
+    "end_time": "24:31:38 GMT+0530 (India Standard Time)",
+    "room_id": 1,
+    "status": "CHECKIN",
+    "room_booked_data": [
+      {
+        "room_name": "Suite Room - A",
+        "amenities": [
+          {
+            "item1": "Luxury Bed",
+            "item2": "TV",
+            "item3": "AC"
+          }
+        ]
+      }
+    ]
+  }
+]
+
+List all customers with booked data: GET
+http://localhost:3003/bookings/getbookedroomswithcustomers
+
+Request:
+{}
+
+Response:
+[
+  {
+    "customer_name": "John",
+    "date": "3/5/2022",
+    "start_time": "22:31:38 GMT+0530 (India Standard Time)",
+    "end_time": "22:31:38 GMT+0530 (India Standard Time)",
+    "room_booked_data": [
+      {
+        "room_name": "Suite Room - A"
+      }
+    ]
+  },
+  {
+    "customer_name": "Peter",
+    "date": "4/5/2022",
+    "start_time": "23:31:38 GMT+0530 (India Standard Time)",
+    "end_time": "24:31:38 GMT+0530 (India Standard Time)",
+    "room_booked_data": [
+      {
+        "room_name": "Suite Room - A"
+      }
+    ]
+  },
+  {
+    "customer_name": "Victor",
+    "date": "5/5/2022",
+    "start_time": "23:06:07 GMT+0530 (India Standard Time)",
+    "end_time": "23:06:07 GMT+0530 (India Standard Time)",
+    "status": "CHECKOUT",
+    "room_booked_data": [
+      
+    ]
+  }
+]

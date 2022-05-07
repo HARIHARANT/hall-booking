@@ -1,0 +1,67 @@
+db.rooms.find({})
+
+print(new Date().toLocaleDateString())
+print(new Date().toTimeString())
+
+db.createCollection("bookings")
+
+db.bookings.insert([{
+    customer_name:"John",
+    date: new Date().toLocaleDateString(),
+    start_time: new Date().toTimeString(), 
+    end_time: new Date().toTimeString(),
+    room_id: 1,
+    status: "CHECKIN"
+}]);
+
+db.bookings.find({})
+
+// List all the rooms with booked data
+db.rooms.aggregate([
+    {
+    $lookup: {
+           from: "bookings",
+           localField: "room_id",
+           foreignField: "room_id",
+           pipeline:[
+               {
+                   $project:{_id:0, room_id:0, seats:0, priceperhour:0}
+               }
+               ],
+           as: "room_booked_data"
+         }
+}
+]);
+
+db.rooms.find();
+db.rooms.insert([{       
+        "room_id": 4,
+        "room_name": "VVIP Room - A",
+        "seats": 5,
+        "amenities": [
+            {
+                "item1": "VIP Luxury Bed and Bath",
+                "item2": "98 inch SONY TV",
+                "item3": "AC BAR / SWIM POOL"
+            }
+        ],
+        "priceperhour": 50000
+    }])
+
+
+// List all customers with bookings data
+db.bookings.aggregate([
+    {
+    $lookup: {
+           from: "rooms",
+           localField: "room_id",
+           foreignField: "room_id",
+           pipeline:[
+               {
+                   $project:{_id:0, room_id:0, seats:0, priceperhour:0, amenities:0}
+               }
+               ],
+           as: "room_booked_data"
+         }
+}
+]).project({_id:0, room_id: 0});
