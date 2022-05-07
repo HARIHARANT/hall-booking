@@ -1,5 +1,5 @@
 Fetch Rooms: GET
-http://localhost:3005/get
+http://localhost:3003/rooms/get
 Request: 
 {}
 
@@ -22,7 +22,7 @@ Response:
 ]
 
 Create Rooms: POST
-http://localhost:3005/set
+http://localhost:3003/rooms/set
 
 Request:
 {       
@@ -47,7 +47,7 @@ Response:
 
 
 Booking Room: GET
-http://localhost:3005/bookings/get
+http://localhost:3003/bookings/get
 
 Request: 
 {}
@@ -73,7 +73,7 @@ Response:
 ]
 
 Create Bookings: POST
-http://localhost:3005/bookings/set
+http://localhost:3003/bookings/set
 
 Request:
 {   
