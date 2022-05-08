@@ -3,7 +3,7 @@ const mongo = require("./shared");
 const roomsRouter = require("./router/createRoom");
 const bookingsRouter = require("./router/bookings");
 const cors =require("cors");
-const cors =require("dotenv");
+const dotenv =require("dotenv");
 const app = express();
 dotenv.config();
 app.use(cors());
