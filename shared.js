@@ -5,7 +5,7 @@ module.exports = {
     async connect(){
         try{
             console.log("Welcome");
-            const client = await MongoClient.connect("mongodb://localhost:27017");
+            const client = await MongoClient.connect(process.env.MONGO_DRIVER);
             this.selectedDb = client.db("hall-booking");
             console.log(this.selectedDb);
         }catch(e){
