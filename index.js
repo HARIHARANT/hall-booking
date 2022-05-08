@@ -11,8 +11,8 @@ app.use(express.json());
 mongo.connect();
 
 app.use("/",(req,res,next)=>{    
-    //next();
-   res.send("Welcome to hallss");
+    next();
+   //res.send("Welcome to hallss");
 });
 
 app.use("/rooms",roomsRouter);
